@@ -1,0 +1,25 @@
+{
+  "api": {
+    "requireProjectId": "project_id là bắt buộc",
+    "requireSimulationId": "simulation_id là bắt buộc",
+    "projectNotFound": "Không tìm thấy project: {id}",
+    "simulationNotFound": "Không tìm thấy simulation: {id}",
+    "taskNotFound": "Không tìm thấy task: {id}",
+    "reportAlreadyExists": "Báo cáo đã tồn tại",
+    "reportGenerated": "Đã tạo báo cáo",
+    "reportGenerateStarted": "Bắt đầu tạo báo cáo",
+    "reportGenerateFailed": "Tạo báo cáo thất bại",
+    "initReportAgent": "Khởi tạo Report Agent",
+    "requireTaskOrSimId": "Cần task_id hoặc simulation_id",
+    "missingGraphIdEnsure": "Thiếu graph_id",
+    "missingSimRequirement": "Thiếu mô tả simulation",
+    "zepApiKeyMissing": "Thiếu ZEP API Key",
+    "configError": "Lỗi cấu hình: {details}",
+    "graphBuilding": "Đang xây dựng graph",
+    "ontologyNotGenerated": "Chưa sinh ontology",
+    "textNotFound": "Không tìm thấy nội dung",
+    "requireSimulationRequirement": "simulation_requirement là bắt buộc",
+    "requireFileUpload": "Cần upload tệp",
+    "noDocProcessed": "Không có tài liệu hợp lệ"
+  }
+}

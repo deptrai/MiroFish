@@ -58,3 +58,6 @@ backend/uploads/
 
 # Docker 数据
 data/
+# MCP test virtualenv + env backups (Chainlens local integration)
+.venv-mcp-tests/
+.env.bak

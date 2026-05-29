@@ -1,0 +1,8 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY requirements-mcp.txt mcp_server.py ./
+RUN pip install --no-cache-dir -r requirements-mcp.txt
+
+EXPOSE 8901
+CMD ["python", "mcp_server.py", "--transport", "sse", "--port", "8901"]

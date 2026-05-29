@@ -5,7 +5,7 @@
   },
   "en": {
     "label": "English",
-    "llmInstruction": "Please respond in English."
+    "llmInstruction": "⚠️ REQUIRED LANGUAGE: All responses, reports, titles, descriptions, paragraphs, quotes, and bullet points MUST be written in ENGLISH. Do NOT use Chinese or any other language. Even if source documents, system prompts, or input data are in Chinese, you MUST write the entire output in pure English. This is the supreme requirement — no exceptions."
   },
   "es": {
     "label": "Español",
@@ -26,5 +26,9 @@
   "de": {
     "label": "Deutsch",
     "llmInstruction": "Bitte antworten Sie auf Deutsch."
+  },
+  "vi": {
+    "label": "Tiếng Việt",
+    "llmInstruction": "⚠️ NGÔN NGỮ BẮT BUỘC: Toàn bộ phản hồi, báo cáo, tiêu đề, mô tả, đoạn văn, trích dẫn, bullet points PHẢI viết bằng TIẾNG VIỆT. KHÔNG sử dụng tiếng Trung, tiếng Anh hay bất kỳ ngôn ngữ nào khác. Ngay cả khi tài liệu nguồn, system prompt hoặc dữ liệu đầu vào bằng tiếng Trung, bạn vẫn PHẢI viết toàn bộ output bằng tiếng Việt thuần. Đây là yêu cầu tối thượng — không có ngoại lệ."
   }
 }

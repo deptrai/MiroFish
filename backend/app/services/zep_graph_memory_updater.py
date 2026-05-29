@@ -243,7 +243,8 @@ class ZepGraphMemoryUpdater:
         if not self.api_key:
             raise ValueError("ZEP_API_KEY未配置")
         
-        self.client = Zep(api_key=self.api_key)
+        _base_url = Config.ZEP_API_URL
+        self.client = Zep(api_key=self.api_key, base_url=_base_url) if _base_url else Zep(api_key=self.api_key)
         
         # 活动队列
         self._activity_queue: Queue = Queue()

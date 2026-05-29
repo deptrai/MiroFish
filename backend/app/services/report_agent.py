@@ -903,7 +903,12 @@ class ReportAgent:
         self.simulation_id = simulation_id
         self.simulation_requirement = simulation_requirement
         
-        self.llm = llm_client or LLMClient()
+        # REPORT_LLM_MODEL_NAME env override: lets ops pin the report-writing
+        # model (e.g. gpt-4o) independently of the default simulation LLM
+        # (qwen-turbo is Chinese-biased and refuses to switch language even
+        # with strong instructions).
+        report_model = os.environ.get("REPORT_LLM_MODEL_NAME")
+        self.llm = llm_client or (LLMClient(model=report_model) if report_model else LLMClient())
         self.zep_tools = zep_tools or ZepToolsService()
         
         # 工具定义
@@ -1163,7 +1168,7 @@ class ReportAgent:
         if progress_callback:
             progress_callback("planning", 30, t('progress.generatingOutline'))
         
-        system_prompt = f"{PLAN_SYSTEM_PROMPT}\n\n{get_language_instruction()}"
+        system_prompt = f"{get_language_instruction()}\n\n{PLAN_SYSTEM_PROMPT}\n\n{get_language_instruction()}"
         user_prompt = PLAN_USER_PROMPT_TEMPLATE.format(
             simulation_requirement=self.simulation_requirement,
             total_nodes=context.get('graph_statistics', {}).get('total_nodes', 0),
@@ -1259,7 +1264,9 @@ class ReportAgent:
             section_title=section.title,
             tools_description=self._get_tools_description(),
         )
-        system_prompt = f"{system_prompt}\n\n{get_language_instruction()}"
+        # Locale clamp at both ends — the section-write prompt has the heaviest
+        # Chinese context (agent posts/comments) and is the most prone to drift.
+        system_prompt = f"{get_language_instruction()}\n\n{system_prompt}\n\n{get_language_instruction()}"
 
         # 构建用户prompt - 每个已完成章节各传入最大4000字
         if previous_sections:
@@ -1805,7 +1812,9 @@ class ReportAgent:
             report_content=report_content if report_content else "（暂无报告）",
             tools_description=self._get_tools_description(),
         )
-        system_prompt = f"{system_prompt}\n\n{get_language_instruction()}"
+        # Locale clamp: prepend AND append so the LLM cannot drift into the
+        # source language of the report context.
+        system_prompt = f"{get_language_instruction()}\n\n{system_prompt}\n\n{get_language_instruction()}"
 
         # 构建消息
         messages = [{"role": "system", "content": system_prompt}]
