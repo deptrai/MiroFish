@@ -271,10 +271,20 @@ async def mirofish_get_report_by_simulation(simulation_id: str) -> str:
 
 @mcp.tool
 async def mirofish_chat_with_report(report_id: str, message: str, conversation_history: list[dict[str, Any]] | None = None) -> str:
+    # The Flask /api/report/chat endpoint keys on simulation_id (+ chat_history),
+    # NOT report_id/conversation_history. Resolve simulation_id from the report so
+    # callers can keep passing report_id.
+    report_raw = await _request("GET", f"/api/report/{report_id}")
+    try:
+        simulation_id = (json.loads(report_raw).get("data") or {}).get("simulation_id")
+    except (json.JSONDecodeError, AttributeError):
+        simulation_id = None
+    if not simulation_id:
+        return json.dumps({"success": False, "error": f"Could not resolve simulation_id for report {report_id}"})
     return await _request("POST", "/api/report/chat", json_body={
-        "report_id": report_id,
+        "simulation_id": simulation_id,
         "message": message,
-        "conversation_history": conversation_history or [],
+        "chat_history": conversation_history or [],
     })
 
 
