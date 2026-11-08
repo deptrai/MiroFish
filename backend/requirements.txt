@@ -18,7 +18,7 @@ zep-cloud==3.13.0
 
 # ============= OASIS 社交媒体模拟 =============
 # OASIS 社交模拟框架
-camel-oasis==0.2.5
+camel-oasis==0.2.6
 camel-ai==0.2.78
 
 # ============= 文件处理 =============
@@ -33,3 +33,14 @@ python-dotenv>=1.0.0
 
 # 数据验证
 pydantic>=2.0.0
+
+# ============= SECURITY UPDATES =============
+# Critical security fixes (CVSS 9.0+)
+certifi>=2026.10.18
+nltk>=3.10.3
+pillow>=13.0.0
+sentence-transformers>=5.6.0
+transformers>=4.57.6
+unstructured>=0.24.0
+cryptography>=46.0.7
+anyio>=4.14.2
